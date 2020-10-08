@@ -21,7 +21,21 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - name: Install SFDX
+        env:
+          SFDX_AUTOUPDATE_DISABLE: false
+          SFDX_USE_GENERIC_UNIX_KEYCHAIN: true
+          SFDX_DOMAIN_RETRY: 300
+          SFDX_PROJECT_AUTOUPDATE_DISABLE_FOR_PACKAGE_CREATE: true
+          SFDX_PROJECT_AUTOUPDATE_DISABLE_FOR_PACKAGE_VERSION_CREATE: true
+        run: |
+          mkdir /tmp/sfdx
+          wget -q https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz -O /tmp/sfdx/sfdx-linux-amd64.tar.xz
+          tar xJf /tmp/sfdx/sfdx-linux-amd64.tar.xz -C /tmp/sfdx/ --strip-components 1
+          /tmp/sfdx/install
 
+          echo y|sfdx plugins:install sfdx-codescan-plugin
+        
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
