@@ -1,0 +1,29 @@
+name: CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Codescan On Push
+        if: github.event_name == 'push'
+        uses: codescan-io/codescan-scanner-action@1.2
+        with:
+          organization: 123
+          projectKey: Will-Test
+          login: ${{ secrets.ACTIONS1 }}
+
+      - name: Run Codescan On PR
+        if: github.event_name == 'pull_request'
+        uses: codescan-io/codescan-scanner-action@1.2
+        with:
+          organization: 123
+          projectKey: Will-Test
+          login: ${{ secrets.actions1 }}
+          args: |
+            sonar.branch.name=${{github.head_ref}}
+            sonar.branch.target=${{github.base_ref}}
+            sonar.branch.type=SHORT
