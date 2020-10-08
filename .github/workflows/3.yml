@@ -14,7 +14,7 @@ jobs:
         with:
           organization: 123
           projectKey: Will-Test
-          login: ${{ secrets.actions1 }}
+          login: ${{ secrets.ACTIONS1 }}
 
       - name: Run Codescan On PR
         if: github.event_name == 'pull_request'
