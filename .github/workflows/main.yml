@@ -34,7 +34,7 @@ jobs:
       - name: CodeScan Scanner
   # You may pin to the exact commit or the version.
   # uses: codescan-io/codescan-scanner-action@5b2e8c5683ef6a5adc8fa3b7950bb07debccce12
-      - uses: codescan-io/codescan-scanner-action@1.2
+        uses: codescan-io/codescan-scanner-action@1.2
         with:
     # CodeScan Organization Key
           organization: 123
