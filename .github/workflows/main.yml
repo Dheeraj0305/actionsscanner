@@ -57,17 +57,15 @@ jobs:
     # CodeScan Login Key
           login: ${{ secrets.actions1 }}
     # CodeScanCloud endpoint for your project
-          codeScanUrl: https://app.codescan.io/organizations/123/projects
+          codeScanUrl: https://app.codescan.io/
     # This task will poll CodeScanCloud until the analysis is completed, or until the timeout is reached
           pollingTimeoutSec: 900
     # The flag to indicate that SARIF file should be generated
       - name: Run Codescan On Push
         if: github.event_name == 'push'
-        env:  
+        env: 
           branch_name: ${{ github.ref }}
           target: ${{github.base_ref}}
           branch_type: SHORT 
-        run: |
-         sfdx codescan:run --token=$codescan_token --projectkey=$codescan_project_key --organization=$codescan_org -Dsonar.branch.name=$branch_name
           generateSarifFile: true
           key: ${{ secrets.actions1 }} 
