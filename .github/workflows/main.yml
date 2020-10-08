@@ -9,6 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Install SFDX
         env:
           SFDX_AUTOUPDATE_DISABLE: false
@@ -46,3 +47,5 @@ jobs:
           branch_type: SHORT 
           generateSarifFile: true
           key: ${{ secrets.actions1 }} 
+          run: |
+            sfdx codescan:run --token=$codescan_token --projectkey=$codescan_project_key --organization=$codescan_org -Dsonar.branch.name=$branch_name
