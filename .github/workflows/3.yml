@@ -18,16 +18,12 @@ jobs:
 
       - name: Run Codescan On PR
         if: github.event_name == 'pull_request'
-        env:  
-          branch_name: ${{github.head_ref}}
-          target: ${{github.base_ref}}
-          branch_type: SHORT 
         uses: codescan-io/codescan-scanner-action@1.2
         with:
           organization: 123
           projectKey: Will-Test
           login: ${{ secrets.actions1 }}
           args: |
-            sonar.branch.name=$branch_name
-            sonar.branch.target=$target 
-            sonar.branch.type=$branch_type
+            sonar.branch.name=${{github.head_ref}}
+            sonar.branch.target=${{github.base_ref}}
+            sonar.branch.type=SHORT
