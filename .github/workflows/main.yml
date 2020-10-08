@@ -43,10 +43,8 @@ jobs:
     # CodeScan Login Key
           login: ${{ secrets.actions1 }}
     # CodeScanCloud endpoint for your project
-          codeScanUrl: # optional, default is https://app.codescan.io/
+          codeScanUrl: https://app.codescan.io/organizations/123/projects
     # This task will poll CodeScanCloud until the analysis is completed, or until the timeout is reached
-          pollingTimeoutSec: # optional, default is 900
+          pollingTimeoutSec: 900
     # The flag to indicate that SARIF file should be generated
-          generateSarifFile: # optional, default is true
-    # Additional arguments to the sonarcloud scanner
-          args: # optional
+          generateSarifFile: true
